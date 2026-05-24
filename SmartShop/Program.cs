@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SmartShop.Components;
 using SmartShop.Datas;
+using SmartShop.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +11,9 @@ builder.Services.AddRazorComponents()
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+//Dependecy Injection for Services
+builder.Services.AddScoped<ProductService>();
 
 var app = builder.Build();
 
