@@ -1,0 +1,89 @@
+﻿@page "/products"
+
+@using SmartShop.Models
+@using SmartShop.Services
+
+@inject ProductService productService
+
+<h3 class="mb-4">Product Management</h3>
+
+<div class="card p-4 shadow-sm mb-4">
+
+    <div class="mb-3">
+        <label>Product Name</label>
+        <input class="form-control"
+               @bind="product.Name"
+               placeholder="Enter product name" />
+    </div>
+
+    <div class="mb-3">
+        <label>Price</label>
+        <input type="number"
+               class="form-control"
+               @bind="product.Price"
+               placeholder="Enter product price" />
+    </div>
+
+    <button class="btn btn-primary"
+            @onclick="SaveProduct">
+        Save Product
+    </button>
+
+</div>
+
+<div class="card p-4 shadow-sm">
+
+    <h4>Product List</h4>
+
+    @if (products.Count == 0)
+    {
+        <p>No products available.</p>
+    }
+    else
+    {
+        <table class="table table-bordered table-hover">
+
+            <thead class="table-dark">
+                <tr>
+                    <th>SN</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in products.Select((value, index) => new { value, index }))
+                {
+                    <tr>
+                        <td>@(item.index + 1)</td>
+                        <td>@item.value.Name</td>
+                        <td>Rs. @item.value.Price</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+
+</div>
+
+@code {
+
+    Models.Product product = new();
+
+    List<Models.Product> products = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await productService.GetProductsAsync();
+    }
+
+    async Task SaveProduct()
+    {
+        await productService.AddProductAsync(product);
+
+        products = await productService.GetProductsAsync();
+
+        product = new();
+    }
+}
