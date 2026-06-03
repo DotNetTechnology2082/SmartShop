@@ -1,5 +1,7 @@
 ﻿@page "/products"
 
+@rendermode InteractiveServer
+
 @using SmartShop.Models
 @using SmartShop.Services
 
@@ -9,31 +11,31 @@
 
 <div class="card p-4 shadow-sm mb-4">
 
-    <EditForm Model="product" OnValidSubmit="SaveProduct">
+    <EditForm Model="product" OnValidSubmit="SaveProduct" FormName="product">
         <div class="mb-3">
             <label>Product Name</label>
-            <input class="form-control"
+            <InputText class="form-control"
                    @bind-value="product.Name"
                    placeholder="Enter product name" />
         </div>
 
         <div class="mb-3">
             <label>Product Description</label>
-            <input class="form-control"
+            <InputText class="form-control"
                    @bind-value="product.Description"
                    placeholder="Enter product Description" />
         </div>
 
         <div class="mb-3">
             <label>Price</label>
-            <input type="number"
+            <InputNumber type="number"
                    class="form-control"
                    @bind-value="product.Price"
                    placeholder="Enter product price" />
         </div>
         <div class="mb-3">
             <label>Rate</label>
-            <input type="number"
+            <InputText type="number"
                    class="form-control"
                    @bind-value="product.Rate"
                    placeholder="Enter product Rate" />
