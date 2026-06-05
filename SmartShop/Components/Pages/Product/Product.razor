@@ -12,6 +12,9 @@
 <div class="card p-4 shadow-sm mb-4">
 
     <EditForm Model="product" OnValidSubmit="SaveProduct" FormName="product">
+        <DataAnnotationsValidator/>
+        <ValidationSummary/>
+
         <div class="mb-3">
             <label>Product Name</label>
             <InputText class="form-control"
@@ -64,6 +67,7 @@
                     <th>SN</th>
                     <th>Product Name</th>
                     <th>Price</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
 

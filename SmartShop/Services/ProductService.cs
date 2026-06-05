@@ -23,5 +23,11 @@ namespace SmartShop.Services
             _db.Products.Add(product);
             await _db.SaveChangesAsync();
         }
+
+        public async Task Updateproduct(Product product)
+        {
+            _db.Products.Update(product);
+            await _db.SaveChangesAsync();
+        }
     }
 }

@@ -11,8 +11,8 @@ using SmartShop.Datas;
 namespace SmartShop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260601030643_UpdateModel")]
-    partial class UpdateModel
+    [Migration("20260604030341_Commit")]
+    partial class Commit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
