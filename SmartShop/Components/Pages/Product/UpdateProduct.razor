@@ -1,11 +1,61 @@
-﻿@page "/updateproduct/{id:int}"
+﻿@page "/updateproduct/{Id:int}"
+@rendermode InteractiveServer
+
+@using SmartShop.Models
 @using SmartShop.Services
 
 @inject ProductService productService
+@inject NavigationManager navigation
 
-<h3>UpdateProduct</h3>
+<h3>Update Product</h3>
+
+<div class="card p-4 shadow-sm">
+
+    <EditForm Model="product" OnValidSubmit="UpdateProducts" FormName="update">
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label>Product Name</label>
+            <InputText class="form-control"
+                       @bind-Value="product.Name" />
+        </div>
+
+        <div class="mb-3">
+            <label>Description</label>
+            <InputText class="form-control"
+                       @bind-Value="product.Description" />
+        </div>
+
+        <div class="mb-3">
+            <label>Price</label>
+            <InputNumber class="form-control"
+                         @bind-Value="product.Price" />
+        </div>
+
+        <div class="mb-3">
+            <label>Rate</label>
+            <InputText class="form-control"
+                       @bind-Value="product.Rate" />
+        </div>
+
+        <button type="submit" class="btn btn-success">
+            Update Product
+        </button>
+
+        <button type="button"
+                class="btn btn-secondary ms-2"
+                @onclick="Back">
+            Cancel
+        </button>
+
+    </EditForm>
+
+</div>
 
 @code {
+
     [Parameter]
     public int Id { get; set; }
 
@@ -13,7 +63,20 @@
 
     protected override async Task OnInitializedAsync()
     {
-        product = await productService.GetProductById(Id)
-        ?? new Models.Product();
+        var products = await productService.GetProductsAsync();
+
+        product = products.FirstOrDefault(x => x.Id == Id) ?? new Models.Product();
+    }
+
+    async Task UpdateProducts()
+    {
+        await productService.Updateproduct(product);
+
+        navigation.NavigateTo("/products");
+    }
+
+    void Back()
+    {
+        navigation.NavigateTo("/products");
     }
 }
