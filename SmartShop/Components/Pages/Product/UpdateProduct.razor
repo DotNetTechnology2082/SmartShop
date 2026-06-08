@@ -1,0 +1,19 @@
+﻿@page "/updateproduct/{id:int}"
+@using SmartShop.Services
+
+@inject ProductService productService
+
+<h3>UpdateProduct</h3>
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    Models.Product product = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        product = await productService.GetProductById(Id)
+        ?? new Models.Product();
+    }
+}

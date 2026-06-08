@@ -12,36 +12,36 @@
 <div class="card p-4 shadow-sm mb-4">
 
     <EditForm Model="product" OnValidSubmit="SaveProduct" FormName="product">
-        <DataAnnotationsValidator/>
-        <ValidationSummary/>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
         <div class="mb-3">
             <label>Product Name</label>
             <InputText class="form-control"
-                   @bind-value="product.Name"
-                   placeholder="Enter product name" />
+                       @bind-value="product.Name"
+                       placeholder="Enter product name" />
         </div>
 
         <div class="mb-3">
             <label>Product Description</label>
             <InputText class="form-control"
-                   @bind-value="product.Description"
-                   placeholder="Enter product Description" />
+                       @bind-value="product.Description"
+                       placeholder="Enter product Description" />
         </div>
 
         <div class="mb-3">
             <label>Price</label>
             <InputNumber type="number"
-                   class="form-control"
-                   @bind-value="product.Price"
-                   placeholder="Enter product price" />
+                         class="form-control"
+                         @bind-value="product.Price"
+                         placeholder="Enter product price" />
         </div>
         <div class="mb-3">
             <label>Rate</label>
             <InputText type="number"
-                   class="form-control"
-                   @bind-value="product.Rate"
-                   placeholder="Enter product Rate" />
+                       class="form-control"
+                       @bind-value="product.Rate"
+                       placeholder="Enter product Rate" />
         </div>
 
         <button type="submit" class="btn btn-primary">
@@ -78,6 +78,13 @@
                         <td>@(item.index + 1)</td>
                         <td>@item.value.Name</td>
                         <td>Rs. @item.value.Price</td>
+                        <th>
+                            <a class="btn btn-warning btn-sm"
+                                   href="updateproduct/@item.value.Id">
+                                @* updateproduct/{id:int} *@
+                                Update
+                            </a>
+                        </th>
                     </tr>
                 }
             </tbody>

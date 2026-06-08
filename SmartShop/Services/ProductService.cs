@@ -29,5 +29,9 @@ namespace SmartShop.Services
             _db.Products.Update(product);
             await _db.SaveChangesAsync();
         }
+        public async Task<Product?> GetProductById(int Id)
+        {
+            return await _db.Products.FindAsync(Id);
+        }
     }
 }
