@@ -33,5 +33,16 @@ namespace SmartShop.Services
         {
             return await _db.Products.FindAsync(Id);
         }
+
+        public async Task DeleteProduct(int Id)
+        {
+            var product = await _db.Products.FindAsync(Id);
+
+            if(product != null)
+            {
+                _db.Products.Remove(product);
+                await _db.SaveChangesAsync();
+            }
+        }
     }
 }

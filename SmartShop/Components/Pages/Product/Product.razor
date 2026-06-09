@@ -78,13 +78,18 @@
                         <td>@(item.index + 1)</td>
                         <td>@item.value.Name</td>
                         <td>Rs. @item.value.Price</td>
-                        <th>
+                        <td>
                             <a class="btn btn-warning btn-sm"
                                    href="updateproduct/@item.value.Id">
                                 @* updateproduct/{id:int} *@
                                 Update
                             </a>
-                        </th>
+
+                            <button class="btn btn-warning"
+                                @onclick="()=> Delete(item.value.Id)">
+                                <i class="bi bi-trash">Delete</i>
+                            </button>
+                        </td>
                     </tr>
                 }
             </tbody>
@@ -112,5 +117,12 @@
         products = await productService.GetProductsAsync();
 
         product = new();
+    }
+
+    async Task Delete(int Id)
+    {
+        await productService.DeleteProduct(Id);
+        products = await productService.GetProductsAsync();
+        
     }
 }
